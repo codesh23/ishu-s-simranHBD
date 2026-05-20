@@ -1,0 +1,543 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>🎈 Belated Happy Birthday, Simran! 🎂</title>
+
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap');
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #0f172a;
+        }
+
+        .confetti {
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            background-color: var(--color);
+            border-radius: 50%;
+            opacity: 0;
+            animation: fall 3s ease-in forwards;
+            pointer-events: none;
+        }
+
+        @keyframes fall {
+            0% {
+                transform: translate(0, 0) rotate(0deg);
+                opacity: 1;
+            }
+
+            100% {
+                transform: translate(var(--x), 100vh) rotate(720deg);
+                opacity: 0;
+            }
+        }
+
+        .heart {
+            animation: pulse 1.5s infinite alternate;
+        }
+
+        @keyframes pulse {
+            from {
+                transform: scale(1);
+            }
+
+            to {
+                transform: scale(1.1);
+            }
+        }
+
+        .card {
+            position: relative;
+            user-select: none;
+            cursor: pointer;
+            perspective: 1000px;
+            font-size: 1.5rem;
+        }
+
+        @media (min-width: 640px) {
+            .card {
+                font-size: 2rem;
+            }
+        }
+
+        .card-inner {
+            width: 100%;
+            height: 100%;
+            position: relative;
+            transition: transform 0.6s;
+            transform-style: preserve-3d;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            border-radius: 0.5rem;
+        }
+
+        .card.is-flipped .card-inner {
+            transform: rotateY(180deg);
+            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .card-back,
+        .card-front {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            -webkit-backface-visibility: hidden;
+            backface-visibility: hidden;
+            border-radius: 0.5rem;
+        }
+
+        .card-front {
+            transform: rotateY(180deg);
+            background-color: #f0fdf4;
+        }
+
+        .card.matched {
+            cursor: default;
+            background-color: transparent !important;
+        }
+
+        .card.matched .card-inner {
+            box-shadow: 0 0 20px #34d399;
+        }
+
+        .card.matched .card-front {
+            background-color: #34d399 !important;
+        }
+
+        .card-back {
+            background: linear-gradient(135deg, #f9a8d4 0%, #a855f7 100%);
+            text-shadow: 0 0 8px rgba(0, 0, 0, 0.3);
+        }
+    </style>
+</head>
+
+<body class="min-h-screen flex items-center justify-center p-4">
+
+    <div id="card"
+        class="bg-white dark:bg-slate-800 p-8 md:p-12 rounded-3xl shadow-2xl max-w-lg w-full text-center transform transition-transform duration-500 border-4 border-pink-500/50">
+
+        <!-- Header -->
+        <div class="mb-6">
+            <p class="text-4xl mb-4 heart">❤️</p>
+
+            <h2
+                class="text-4xl sm:text-5xl font-black text-pink-600 dark:text-pink-400 bg-clip-text text-transparent bg-gradient-to-r from-pink-500 to-yellow-400">
+                A Belated Happy Birthday!
+            </h2>
+
+            <p class="mt-2 text-xl text-slate-500 dark:text-slate-400">
+                To the amazing Simran!
+            </p>
+        </div>
+
+        <!-- STAGE 1 -->
+        <div id="stage-1" class="stage">
+
+            <h1
+                class="text-3xl sm:text-4xl font-extrabold text-slate-900 dark:text-white mb-4 leading-tight">
+                The Belated Birthday Scroll Begins... 📜
+            </h1>
+
+            <div
+                class="bg-pink-50 dark:bg-slate-700 p-6 rounded-xl border border-pink-200 dark:border-slate-600 mb-8">
+
+                <p class="text-base text-slate-700 dark:text-slate-200 italic mb-4">
+                    Simran, I'm genuinely sorry for the delay, but I wanted to make sure your belated wish was worth the wait!
+                    This isn't just a site; it's a small journey built just for you.
+                    To unlock the final surprise and message, you'll need to pass the test of skill!
+                </p>
+
+                <p class="text-sm font-semibold text-pink-700 dark:text-pink-300 mb-4">
+                    Click the button below to start your adventure!
+                </p>
+            </div>
+
+            <button id="stage1-button"
+                onclick="goToStageTwo()"
+                class="w-full py-3 px-6 bg-pink-500 text-white font-bold text-lg rounded-full shadow-lg shadow-pink-500/50 hover:bg-pink-600 transition duration-300 transform hover:scale-105 active:scale-95">
+                Begin the Journey! ➡️
+            </button>
+        </div>
+
+        <!-- STAGE 2 -->
+        <div id="stage-2" class="stage hidden">
+
+            <h1
+                class="text-3xl sm:text-4xl font-extrabold text-slate-900 dark:text-white mb-4 leading-tight">
+                Game Time: The Birthday Memory Challenge! 🧠
+            </h1>
+
+            <div
+                class="bg-pink-50 dark:bg-slate-700 p-6 rounded-xl border border-pink-200 dark:border-slate-600 mb-8">
+
+                <p class="text-base text-slate-700 dark:text-slate-200 italic mb-4">
+                    Test your memory skills! Find all the matching pairs of birthday items to unlock the final surprise.
+                </p>
+
+                <p class="text-sm font-semibold text-pink-700 dark:text-pink-300 mb-4">
+                    (Match 8 pairs to win!)
+                </p>
+
+                <!-- Game Board -->
+                <div id="game-board"
+                    class="grid grid-cols-4 gap-3 p-2 bg-pink-200 dark:bg-slate-900 rounded-lg shadow-xl mx-auto max-w-md w-full">
+                </div>
+
+                <p id="score-display"
+                    class="mt-4 text-2xl font-bold text-pink-600 dark:text-pink-400">
+                    Matches: 0 / 8
+                </p>
+            </div>
+        </div>
+
+        <!-- STAGE 3 -->
+        <div id="stage-3" class="stage hidden">
+
+            <h1
+                class="text-3xl sm:text-4xl font-extrabold text-slate-900 dark:text-white mb-4 leading-tight">
+                Access Granted! The Ultimate Wish! 🎉
+            </h1>
+
+            <div
+                class="bg-yellow-50 dark:bg-yellow-900 p-6 rounded-xl border border-yellow-200 dark:border-yellow-600 mb-8">
+
+                <p class="text-base text-slate-700 dark:text-slate-200 italic">
+                    You're a memory master! I knew you'd ace that.
+                    You deserve all the happiness in the world.
+                    I'm wishing you a year filled with success, laughter,
+                    and incredible adventures. May your belated celebration
+                    last all week!
+                </p>
+
+                <p class="mt-4 font-semibold text-pink-600 dark:text-pink-400">
+                    - Your forgetful but loving friend
+                </p>
+            </div>
+
+            <button id="confetti-button"
+                class="w-full py-3 px-6 bg-pink-500 text-white font-bold text-lg rounded-full shadow-lg shadow-pink-500/50 hover:bg-pink-600 transition duration-300 transform hover:scale-105 active:scale-95 flex items-center justify-center space-x-2 animate-pulse">
+
+                <span class="text-2xl">🎁</span>
+                <span>Click for a Confetti Celebration!</span>
+                <span class="text-2xl">🎉</span>
+            </button>
+        </div>
+
+        <!-- Message Box -->
+        <div id="message-box"
+            class="fixed inset-0 bg-black/50 backdrop-blur-sm z-50 items-center justify-center hidden">
+
+            <div class="bg-white p-6 rounded-xl shadow-2xl max-w-xs w-full text-center">
+
+                <p class="text-lg font-semibold text-slate-800 mb-4">
+                    🥳 That's it! May the next year be your best one yet!
+                </p>
+
+                <button
+                    onclick="document.getElementById('message-box').classList.add('hidden')"
+                    class="py-2 px-4 bg-pink-500 text-white rounded-lg hover:bg-pink-600 transition">
+
+                    Close
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+
+        function showStage(stageNumber) {
+            document.querySelectorAll('.stage')
+                .forEach(el => el.classList.add('hidden'));
+
+            document.getElementById(`stage-${stageNumber}`)
+                .classList.remove('hidden');
+        }
+
+        function goToStageTwo() {
+            showStage(2);
+            createBoard();
+        }
+
+        function goToStageThree() {
+
+            if (!document.getElementById('stage-2')
+                .classList.contains('hidden')) {
+
+                showStage(3);
+
+                document.getElementById('confetti-button')
+                    .addEventListener(
+                        'click',
+                        confettiHandler,
+                        { once: true }
+                    );
+            }
+        }
+
+        const REQUIRED_MATCHES = 8;
+
+        let matchesFound = 0;
+        let cardsFlipped = [];
+        let lockBoard = false;
+
+        const cardContent = [
+            '🎂',
+            '🎁',
+            '🎈',
+            '🎉',
+            '🍰',
+            '🥳',
+            '👑',
+            '🥂'
+        ];
+
+        let gameCards = [];
+
+        function shuffle(array) {
+
+            for (let i = array.length - 1; i > 0; i--) {
+
+                const j = Math.floor(Math.random() * (i + 1));
+
+                [array[i], array[j]] = [array[j], array[i]];
+            }
+        }
+
+        function createBoard() {
+
+            gameCards = [...cardContent, ...cardContent];
+
+            shuffle(gameCards);
+
+            const board = document.getElementById('game-board');
+
+            board.innerHTML = '';
+
+            gameCards.forEach((content, index) => {
+
+                const card = document.createElement('div');
+
+                card.classList.add(
+                    'card',
+                    'rounded-lg',
+                    'aspect-square',
+                    'cursor-pointer',
+                    'transition-transform',
+                    'duration-300',
+                    'transform',
+                    'hover:scale-105',
+                    'active:scale-95'
+                );
+
+                card.dataset.index = index;
+                card.dataset.content = content;
+
+                card.innerHTML = `
+                    <div class="card-inner">
+                        <span class="card-back text-white text-3xl sm:text-4xl">?</span>
+                        <span class="card-front text-5xl sm:text-5xl">${content}</span>
+                    </div>
+                `;
+
+                card.onclick = () => handleCardClick(card);
+
+                board.appendChild(card);
+            });
+
+            matchesFound = 0;
+
+            document.getElementById('score-display')
+                .textContent = `Matches: ${matchesFound} / ${REQUIRED_MATCHES}`;
+
+            cardsFlipped = [];
+
+            lockBoard = false;
+        }
+
+        function handleCardClick(card) {
+
+            if (
+                lockBoard ||
+                card.classList.contains('matched') ||
+                card.classList.contains('is-flipped')
+            ) {
+                return;
+            }
+
+            card.classList.add('is-flipped');
+
+            cardsFlipped.push(card);
+
+            if (cardsFlipped.length === 2) {
+
+                lockBoard = true;
+
+                checkForMatch();
+            }
+        }
+
+        function checkForMatch() {
+
+            const [card1, card2] = cardsFlipped;
+
+            const isMatch =
+                card1.dataset.content === card2.dataset.content;
+
+            if (isMatch) {
+
+                matchesFound++;
+
+                document.getElementById('score-display')
+                    .textContent =
+                    `Matches: ${matchesFound} / ${REQUIRED_MATCHES}`;
+
+                card1.classList.add(
+                    'matched',
+                    'hover:scale-100',
+                    'ring-4',
+                    'ring-green-300'
+                );
+
+                card2.classList.add(
+                    'matched',
+                    'hover:scale-100',
+                    'ring-4',
+                    'ring-green-300'
+                );
+
+                card1.style.cursor = 'default';
+                card2.style.cursor = 'default';
+
+                if (matchesFound === REQUIRED_MATCHES) {
+
+                    setTimeout(goToStageThree, 800);
+                }
+
+                resetBoard();
+
+            } else {
+
+                setTimeout(() => {
+
+                    card1.classList.remove('is-flipped');
+
+                    card2.classList.remove('is-flipped');
+
+                    resetBoard();
+
+                }, 1000);
+            }
+        }
+
+        function resetBoard() {
+
+            cardsFlipped = [];
+
+            lockBoard = false;
+        }
+
+        const colors = [
+            '#f472b6',
+            '#fcd34d',
+            '#34d399',
+            '#60a5fa',
+            '#f87171'
+        ];
+
+        function createConfetti() {
+
+            const numConfetti = 80;
+
+            const container = document.body;
+
+            const boundingBox =
+                document.getElementById('card')
+                .getBoundingClientRect();
+
+            for (let i = 0; i < numConfetti; i++) {
+
+                const c = document.createElement('div');
+
+                c.className = 'confetti';
+
+                const color =
+                    colors[Math.floor(Math.random() * colors.length)];
+
+                c.style.setProperty('--color', color);
+
+                const startX =
+                    boundingBox.left +
+                    (Math.random() * boundingBox.width);
+
+                const startY = boundingBox.top - 10;
+
+                c.style.left = `${startX}px`;
+
+                c.style.top = `${startY}px`;
+
+                const endX =
+                    `${(Math.random() - 0.5) * 500}px`;
+
+                c.style.setProperty('--x', endX);
+
+                const size = Math.random() * 8 + 6;
+
+                c.style.width = `${size}px`;
+
+                c.style.height = `${size}px`;
+
+                c.style.animationDuration =
+                    `${Math.random() * 2 + 3}s`;
+
+                c.style.animationDelay =
+                    `${Math.random() * 0.8}s`;
+
+                container.appendChild(c);
+
+                c.addEventListener('animationend', () => {
+
+                    c.remove();
+                });
+            }
+        }
+
+        function confettiHandler() {
+
+            createConfetti();
+
+            const button =
+                document.getElementById('confetti-button');
+
+            button.textContent =
+                "🥳 Happy Birthday Again and Again!";
+
+            button.classList.remove('animate-pulse');
+
+            setTimeout(() => {
+
+                const messageBox =
+                    document.getElementById('message-box');
+
+                messageBox.classList.remove('hidden');
+
+                messageBox.classList.add('flex');
+
+            }, 300);
+        }
+
+        window.onload = function () {
+
+            showStage(1);
+        };
+
+    </script>
+</body>
+</html>
